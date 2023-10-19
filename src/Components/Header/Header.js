@@ -7,10 +7,10 @@ import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext, FirebaseContext } from '../../store/Context';
-import { useHistory } from 'react-router-dom'
+import { useHistory, } from 'react-router-dom'
 
 
-function Header() {
+function  Header() {
  const {user} = useContext(AuthContext);
  const {firebase} = useContext(FirebaseContext);
 
@@ -43,7 +43,10 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>{user ? user.displayName : 'Login'}</span>
+          <span onClick={()=>{
+            !user &&  history.push('/login')
+          
+          }}>{user ? user.displayName : 'Login'}</span>
           <hr />
         </div>
         {user && <span onClick={()=>{
@@ -55,7 +58,9 @@ function Header() {
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span>SELL</span>
+            <span onClick={()=>{
+              history.push('/create')
+            }}>SELL</span>
           </div>
         </div>
       </div>
